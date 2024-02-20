@@ -27,7 +27,9 @@ Product.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 10,
-      // TODO: validates that the value is numerical
+      validate: {
+        isNumberic: true,
+      }
     },
     category_id:{
       type: DataTypes.INTEGER,
