@@ -24,6 +24,7 @@ Tag.belongsToMany(Product, {
   through: {
     model: ProductTag
   },
+  as: 'products',
   foreignKey: 'category_id'
 });
 
