@@ -59,8 +59,22 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", (req, res) => {
-  // delete a category by its `id` value
+// delete a category by its `id` value
+router.delete("/:id", async (req, res) => {
+  try{
+    const categoryId = req.params.id;
+    const deleteCategory = await Category.destroy({
+      where: {id: categoryId}
+    });
+    //if deletion is successful, deleteCategory will contain information about the delete record
+    //if no record is deleted, the id was not found in database
+    if (!deleteCategory){
+      res.status(404).json({message: "no trip with this id!"});
+      return;
+    }
+    res.status(200).json({message: `you have successfully deleted category with an id of ${categoryId} `});
+  } catch(err) {
+  } 
 });
 
 module.exports = router;
